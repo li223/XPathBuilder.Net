@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using XPathBuilder.Net.Objects;
 
 namespace XPathBuilder.Net
@@ -67,6 +67,17 @@ namespace XPathBuilder.Net
 
             pathBuilder.Append(component.pathBuilder);
 
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a custom component to the path.
+        /// </summary>
+        /// <param name="type">Type of component to add to the path.</param>
+        /// <returns>Current <see cref="PathBuilder"/> instance with the new component.</returns>
+        public PathBuilder HasComponent(PathComponentType type)
+        {
+            pathBuilder.Append($"/{type}");
             return this;
         }
 
