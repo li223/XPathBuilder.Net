@@ -1,4 +1,5 @@
 using System.Text;
+
 using XPathBuilder.Net.Objects;
 
 namespace XPathBuilder.Net
@@ -10,6 +11,59 @@ namespace XPathBuilder.Net
     {
         private StringBuilder pathBuilder = new();
         private string rootString = string.Empty;
+
+        /// <summary>
+        /// Way to group sub-calls together into a method. IDK seems fun.
+        /// </summary>
+        /// <param name="action">The builder action to perform</param>
+        /// <param name="clearOnNewChain">Whether or not to clear the path on a new chain call</param>
+        /// <param name="keepRoot">Whether or not to clear the root on a new chain call. Requires <paramref name="clearOnNewChain"/> to be true</param>
+        /// <returns></returns>
+        public PathBuilder Chain(Action<PathBuilder> action, bool clearOnNewChain = true, bool keepRoot = true)
+        {
+            if (clearOnNewChain) Clear(keepRoot);
+
+            action(this);
+            return this;
+        }
+
+        /// <summary>
+        /// Way to group sub-calls together into a method. IDK seems fun.
+        /// </summary>
+        /// <param name="appendRoot">The new root to append to the existing root, useful if there's a sub-menu you navigated into from a previous chain</param>
+        /// <param name="action">The builder action to perform</param>
+        /// <param name="clearOnNewChain">Whether or not to clear the path on a new chain call</param>
+        /// <param name="keepRoot">Whether or not to clear the root on a new chain call. Requires <paramref name="clearOnNewChain"/> to be true</param>
+        /// <returns></returns>
+        public PathBuilder Chain(string appendRoot, Action<PathBuilder> action, bool clearOnNewChain = true, bool keepRoot = true)
+        {
+            if (clearOnNewChain) Clear(keepRoot);
+
+            rootString += appendRoot;
+            pathBuilder.Append(rootString);
+            return Chain(action, clearOnNewChain, keepRoot);
+        }
+
+        /// <summary>
+        /// Way to group sub-calls together into a method. IDK seems fun.
+        /// </summary>
+        /// <param name="appendRoot">The new root to append to the existing root, useful if there's a sub-menu you navigated into from a previous chain</param>
+        /// <param name="action">The builder action to perform</param>
+        /// <param name="clearOnNewChain">Whether or not to clear the path on a new chain call</param>
+        /// <param name="keepRoot">Whether or not to clear the root on a new chain call. Requires <paramref name="clearOnNewChain"/> to be true</param>
+        /// <returns></returns>
+        public PathBuilder Chain(Action<PathBuilder> appendRoot, Action<PathBuilder> action, bool clearOnNewChain = true, bool keepRoot = true)
+        {
+            if (clearOnNewChain) Clear(keepRoot);
+
+            var builderRoot = new PathBuilder();
+            appendRoot(builderRoot);
+
+            rootString += builderRoot;
+            pathBuilder.Append(rootString);
+
+            return Chain(action, clearOnNewChain, keepRoot);
+        }
 
         /// <summary>
         /// Adds a root path to the builder.
@@ -85,10 +139,11 @@ namespace XPathBuilder.Net
         /// Clears the current path.
         /// </summary>
         /// <param name="keepRoot">Whether or not to keep the root path.</param>
-        public void Clear(bool keepRoot = false)
+        public PathBuilder Clear(bool keepRoot = false)
         {
             pathBuilder.Clear();
             if (!string.IsNullOrEmpty(rootString) && keepRoot) pathBuilder.Append(rootString);
+            return this;
         }
 
         /// <summary>

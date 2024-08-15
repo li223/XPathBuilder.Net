@@ -9,6 +9,8 @@
         Pane = 1,
         Button = 2,
         Custom = 3,
-        DataItem = 4
+        DataItem = 4,
+        Group = 5,
+        RadioButton = 6
     }
 }
