@@ -38,7 +38,7 @@ namespace XPathBuilder.Net
         public PathBuilder HasButton() => this.HasComponent(Objects.PathComponentType.Pane);
 
         /// <summary>
-        /// Goes up on path component
+        /// Goes back an element on the path
         /// </summary>
         /// <returns></returns>
         public PathBuilder Back()
