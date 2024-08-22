@@ -39,6 +39,13 @@ namespace XPathBuilder.Net
         public void WithName(string name) => WithParameter("Name", name);
 
         /// <summary>
+        /// Adds a starts with parameter
+        /// </summary>
+        /// <param name="parameterType">The type of parameter to check against</param>
+        /// <param name="value">The value of the parameter to check with</param>
+        public void StartsWith(string parameterType, string value) => pathBuilder.Append($@"[starts-with(@{parameterType},""{value}"")]");
+
+        /// <summary>
         /// Clears the current path.
         /// </summary>
         public void Clear() => pathBuilder.Clear();

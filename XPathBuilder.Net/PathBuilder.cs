@@ -7,7 +7,7 @@ namespace XPathBuilder.Net
     /// <summary>
     /// Main builder class for building XPaths
     /// </summary>
-    public class PathBuilder
+    public partial class PathBuilder
     {
         private StringBuilder pathBuilder = new();
         private string rootString = string.Empty;
@@ -40,7 +40,10 @@ namespace XPathBuilder.Net
             if (clearOnNewChain) Clear(keepRoot);
 
             rootString += appendRoot;
+
+            Clear();
             pathBuilder.Append(rootString);
+
             return Chain(action, clearOnNewChain, keepRoot);
         }
 
@@ -60,6 +63,8 @@ namespace XPathBuilder.Net
             appendRoot(builderRoot);
 
             rootString += builderRoot;
+
+            Clear();
             pathBuilder.Append(rootString);
 
             return Chain(action, clearOnNewChain, keepRoot);
