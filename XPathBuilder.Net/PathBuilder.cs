@@ -106,7 +106,7 @@ namespace XPathBuilder.Net
             var component = new PathComponent();
             action(component);
 
-            pathBuilder.Append(component.pathBuilder);
+            pathBuilder.Append(component.parameterBuilder);
 
             return this;
         }
@@ -124,7 +124,7 @@ namespace XPathBuilder.Net
             var component = new PathComponent();
             action(component);
 
-            pathBuilder.Append(component.pathBuilder);
+            pathBuilder.Append(component.parameterBuilder);
 
             return this;
         }

@@ -1,4 +1,6 @@
-﻿namespace XPathBuilder.Net
+﻿using System.Text.RegularExpressions;
+
+namespace XPathBuilder.Net
 {
     public partial class PathBuilder
     {
@@ -34,5 +36,30 @@
         /// Adds a button component
         /// </summary>
         public PathBuilder HasButton() => this.HasComponent(Objects.PathComponentType.Pane);
+
+        /// <summary>
+        /// Goes up on path component
+        /// </summary>
+        /// <returns></returns>
+        public PathBuilder Back()
+        {
+            var path = pathBuilder.ToString();
+            var matches = Regex.Matches(path, @"(\/[\w]+(\[[\w\-()@,\\""=\s#]+\])+)");
+            var matchValue = matches.Last().Value;
+
+            var place = path.LastIndexOf(matchValue);
+            var newPath = path.Remove(place, matchValue.Length);
+
+            pathBuilder.Clear();
+            pathBuilder.Append(newPath);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Synonym for <see cref="Up"/>
+        /// </summary>
+        /// <returns></returns>
+        public PathBuilder Up() => Back();
     }
 }
