@@ -57,7 +57,7 @@ namespace XPathBuilder.Net
         }
 
         /// <summary>
-        /// Synonym for <see cref="Up"/>
+        /// Synonym for <see cref="Back"/>
         /// </summary>
         /// <returns></returns>
         public PathBuilder Up() => Back();
