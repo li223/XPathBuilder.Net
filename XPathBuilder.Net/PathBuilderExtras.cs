@@ -63,6 +63,18 @@ namespace XPathBuilder.Net
         public PathBuilder HasComboBox(Action<PathComponent> action) => this.HasComponent(Objects.PathComponentType.ComboBox, action);
 
         /// <summary>
+        /// Adds a list component
+        /// </summary>
+        /// <param name="action">The builder action to perform</param>
+        public PathBuilder HasList(Action<PathComponent> action) => this.HasComponent(Objects.PathComponentType.List, action);
+
+        /// <summary>
+        /// Adds a list item component
+        /// </summary>
+        /// <param name="action">The builder action to perform</param>
+        public PathBuilder HasListItem(Action<PathComponent> action) => this.HasComponent(Objects.PathComponentType.ListItem, action);
+
+        /// <summary>
         /// Goes back an element on the path
         /// </summary>
         /// <returns></returns>

@@ -13,6 +13,8 @@
         Group = 5,
         RadioButton = 6,
         Edit = 7,
-        ComboBox = 8
+        ComboBox = 8,
+        List = 9,
+        ListItem = 10
     }
 }
