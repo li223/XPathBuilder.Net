@@ -11,6 +11,8 @@
         Custom = 3,
         DataItem = 4,
         Group = 5,
-        RadioButton = 6
+        RadioButton = 6,
+        Edit = 7,
+        ComboBox = 8
     }
 }

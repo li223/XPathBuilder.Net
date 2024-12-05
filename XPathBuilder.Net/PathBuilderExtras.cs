@@ -38,6 +38,31 @@ namespace XPathBuilder.Net
         public PathBuilder HasButton() => this.HasComponent(Objects.PathComponentType.Pane);
 
         /// <summary>
+        /// Adds an edit component
+        /// </summary>
+        /// <param name="pb"></param>
+        /// <param name="action">The builder action to perform</param>
+        public PathBuilder HasEdit(Action<PathComponent> action) => this.HasComponent(Objects.PathComponentType.Edit, action);
+
+        /// <summary>
+        /// Adds a group component
+        /// </summary>
+        /// <param name="action"></param>
+        public PathBuilder HasGroup(Action<PathComponent> action) => this.HasComponent(Objects.PathComponentType.Group, action);
+
+        /// <summary>
+        /// Adds a radio button component
+        /// </summary>
+        /// <param name="action">The builder action to perform</param>
+        public PathBuilder HasRadioButton(Action<PathComponent> action) => this.HasComponent(Objects.PathComponentType.RadioButton, action);
+
+        /// <summary>
+        /// Adds a combo box component
+        /// </summary>
+        /// <param name="action">The builder action to perform</param>
+        public PathBuilder HasComboBox(Action<PathComponent> action) => this.HasComponent(Objects.PathComponentType.ComboBox, action);
+
+        /// <summary>
         /// Goes back an element on the path
         /// </summary>
         /// <returns></returns>
